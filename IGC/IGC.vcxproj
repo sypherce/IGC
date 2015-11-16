@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClCompile Include="..\source\animation.cpp" />
     <ClCompile Include="..\source\igc.cpp" />
+    <ClCompile Include="..\source\input.cpp" />
     <ClCompile Include="..\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\animation.h" />
     <ClInclude Include="..\source\igc.h" />
+    <ClInclude Include="..\source\input.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D879701-39B5-427A-9BD8-8A9251A8EBD8}</ProjectGuid>

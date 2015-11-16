@@ -256,66 +256,6 @@ namespace IGC
 				}
 				*/
 			}
-			namespace Input //xinput by default
-			{
-				enum dpad_status {
-					DPAD_NONE,
-					DPAD_UP,
-					DPAD_DOWN,
-					DPAD_LEFT,
-					DPAD_RIGHT
-				};
-				extern dpad_status g_dpad_status;
-
-				// Setup everything input related, load setting for default options, etc.
-				//
-				// Returns:
-				//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
-				extern int Init();
-				/*
-				namespace Keyboard
-				{
-					
-				}
-				namespace Mouse
-				{
-					
-				}
-				namespace Touch
-				{
-					
-				}
-				namespace Gamepad
-				{
-					namespace Windows
-					{
-						namespace DInput
-						{
-							
-						}
-						namespace XInput
-						{
-							
-						}
-					}
-					namespace Android_IOS
-					{
-						namespace Bluetooth
-						{
-							
-						}
-						namespace iCade
-						{
-							
-						}
-						namespace Keyboard
-						{
-							
-						}
-					}
-				}
-				*/
-			}
 		}
 		namespace Scripting
 		{

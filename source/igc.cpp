@@ -5,13 +5,14 @@
 	Battles
 	Mini Games*/
 
+#include <iostream>
+#include <string>
+#include <vector>
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "igc.h"
-#include <iostream>
-#include <string>
-#include <vector>
+#include "input.h"
 
 
 namespace IGC
@@ -47,13 +48,14 @@ namespace IGC
 			{
 				g_status = SDL::STATUS_STARTING;
 				//Initialize SDL
-				if (SDL_Init(SDL_INIT_EVERYTHING) < SDL::INIT_SUCCESS) {//reminder: perhaps change `everything` later on 
+				if (SDL_Init(SDL_INIT_EVERYTHING) < SDL::INIT_SUCCESS) {//reminder: perhaps change `SDL_INIT_EVERYTHING` later on 
 					printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 					DeInit();
 					return Engine::RETURN_HALT;
 				}
 				else
 				{
+					//Initialize sub-systems
 					int video_result = SDL::Video::Init();
 					int audio_result = SDL::Audio::Init();
 					int input_result = SDL::Input::Init();
@@ -93,34 +95,66 @@ namespace IGC
 				//Handle events on queue
 
 				//Reset Input Status
-				Input::g_dpad_status = Input::DPAD_NONE;
+				//Input::g_player1_gamepad_status.buttons |= Input::DPAD_NONE;
 
 				while (SDL_PollEvent(&s_events) != 0)
 				{
-					//User requests quit
-					if (s_events.type == SDL_QUIT)
+					switch (s_events.type)
 					{
-						DeInit();
-					}
-					
-					//If a key was pressed
-					if (s_events.type == SDL_KEYDOWN && s_events.key.repeat == 1)
-					{
-						switch (s_events.key.keysym.sym)
+						//User requests quit
+						case SDL_QUIT:
+							DeInit();
+							break;
+
+						//If a key was pressed
+						case SDL_KEYDOWN:
 						{
-						case SDLK_UP:
-							Input::g_dpad_status = Input::DPAD_UP;
-							break;
-						case SDLK_DOWN:
-							Input::g_dpad_status = Input::DPAD_DOWN;
-							break;
-						case SDLK_LEFT:
-							Input::g_dpad_status = Input::DPAD_LEFT;
-							break;
-						case SDLK_RIGHT:
-							Input::g_dpad_status = Input::DPAD_RIGHT;
+							switch (s_events.key.keysym.sym)
+							{
+								case SDLK_UP:
+									Input::g_player1_gamepad_status.buttons |= Input::DPAD_UP;
+									break;
+								case SDLK_DOWN:
+									Input::g_player1_gamepad_status.buttons |= Input::DPAD_DOWN;
+									break;
+								case SDLK_LEFT:
+									Input::g_player1_gamepad_status.buttons |= Input::DPAD_LEFT;
+									break;
+								case SDLK_RIGHT:
+									Input::g_player1_gamepad_status.buttons |= Input::DPAD_RIGHT;
+									break;
+								default://unhandled key press 
+									break;
+							}
 							break;
 						}
+
+						//If a key was released
+						case SDL_KEYUP:
+						{
+							switch (s_events.key.keysym.sym)
+							{
+								case SDLK_UP:
+									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_UP;
+									break;
+								case SDLK_DOWN:
+									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_DOWN;
+									break;
+								case SDLK_LEFT:
+									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_LEFT;
+									break;
+								case SDLK_RIGHT:
+									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_RIGHT;
+									break;
+								default://unhandled key press 
+									break;
+							}
+							break;
+						}
+
+						//unhandled event
+						default:
+							break;
 					}
 				}
 			}
@@ -435,14 +469,6 @@ namespace IGC
 				}
 			}
 
-			namespace Input
-			{
-				dpad_status g_dpad_status = DPAD_NONE;
-				int Init()
-				{
-					return Engine::RETURN_SUCCESS;
-				}
-			}
 		}
 		namespace Scripting
 		{

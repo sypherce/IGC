@@ -1,5 +1,6 @@
 #include <iostream>
 #include "igc.h"
+#include "input.h"
 #include "animation.h"
 
 using namespace IGC;
@@ -34,30 +35,41 @@ int SimpleScene()
 	function_result += x2D::DrawTexture(message, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
 	SDL_DestroyTexture(message);
 
+	//setup frames and animation status, status is static
 	static int current_frame = 0;
 	static int current_animation = 0;
-	switch (Input::g_dpad_status)
+
+	//this checks if any direction is currently pressed
+	bool is_dpad_pressed =
+		((Input::g_player1_gamepad_status.buttons & Input::DPAD_UP) +
+			(Input::g_player1_gamepad_status.buttons & Input::DPAD_DOWN) +
+			(Input::g_player1_gamepad_status.buttons & Input::DPAD_LEFT) +
+			(Input::g_player1_gamepad_status.buttons & Input::DPAD_RIGHT));
+
+	//change animation depending on dpad status
+	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_UP)
 	{
-	case Input::DPAD_UP:
 		current_animation = 3;
-		break;
-	case Input::DPAD_DOWN:
+	}
+	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_DOWN)
+	{
 		current_animation = 0;
-		break;
-	case Input::DPAD_LEFT:
+	}
+	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_LEFT)
+	{
 		current_animation = 1;
-		break;
-	case Input::DPAD_RIGHT:
+	}
+	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_RIGHT)
+	{
 		current_animation = 2;
-		break;
-	default:
-		current_frame--;
-		if (current_frame < 0)
-			current_frame = 0;
-		break;
 	}
 
-	constant_sprite->Draw(15, 55, current_animation, current_frame++);
+	//draw sprite
+	constant_sprite->Draw(15, 55, current_animation, current_frame);
+
+	//if dpad is pressed we animate
+	if (is_dpad_pressed)
+		current_frame++;
 	if (current_frame >= 4)
 		current_frame = 0;
 
