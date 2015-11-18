@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+#include <iostream>
+#include <string>
+#include <vector>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
+#include "SDL_mixer.h"
+#include "igc.h"
+#include "input.h"
+#include "audio.h"
+=======
 /*RPG
 	Dialogue
 	Menus
@@ -13,6 +25,7 @@
 #include <string>
 #include <vector>
 
+>>>>>>> refs/remotes/origin/master
 
 namespace IGC
 {
@@ -20,6 +33,18 @@ namespace IGC
 	{
 		int Init()
 		{
+<<<<<<< HEAD
+			if (SDL::Init() != Engine::VALUE_SUCCESS)
+			{
+				return Engine::VALUE_FAILURE;
+			}
+			if (SDL::LoadMedia() != Engine::VALUE_SUCCESS)
+			{
+				return Engine::VALUE_FAILURE;
+			}
+
+			return Engine::VALUE_SUCCESS;
+=======
 			if (SDL::Init() != Engine::RETURN_SUCCESS)
 			{
 				return Engine::RETURN_HALT;
@@ -30,6 +55,7 @@ namespace IGC
 			}
 
 			return Engine::RETURN_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 		}
 		void Sleep(unsigned int milliseconds)
 		{
@@ -47,6 +73,16 @@ namespace IGC
 			{
 				g_status = SDL::STATUS_STARTING;
 				//Initialize SDL
+<<<<<<< HEAD
+				if (SDL_Init(SDL_INIT_EVERYTHING) < Engine::VALUE_SUCCESS) {//reminder: perhaps change `SDL_INIT_EVERYTHING` later on 
+					printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+					DeInit();
+					return Engine::VALUE_FAILURE;
+				}
+				else
+				{
+					//Initialize sub-systems
+=======
 				if (SDL_Init(SDL_INIT_EVERYTHING) < SDL::INIT_SUCCESS) {//reminder: perhaps change `everything` later on 
 					printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 					DeInit();
@@ -54,11 +90,21 @@ namespace IGC
 				}
 				else
 				{
+>>>>>>> refs/remotes/origin/master
 					int video_result = SDL::Video::Init();
 					int audio_result = SDL::Audio::Init();
 					int input_result = SDL::Input::Init();
 					int scripting_result = Scripting::Init();
 
+<<<<<<< HEAD
+					if ((video_result == Engine::VALUE_SUCCESS) &&
+						(video_result == Engine::VALUE_SUCCESS) &&
+						(video_result == Engine::VALUE_SUCCESS) &&
+						(video_result == Engine::VALUE_SUCCESS))
+					{
+						g_status = SDL::STATUS_RUNNING;
+						return Engine::VALUE_SUCCESS;
+=======
 					if ((video_result == Engine::RETURN_SUCCESS) &&
 						(video_result == Engine::RETURN_SUCCESS) &&
 						(video_result == Engine::RETURN_SUCCESS) &&
@@ -66,11 +112,16 @@ namespace IGC
 					{
 						g_status = SDL::STATUS_RUNNING;
 						return Engine::RETURN_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 					}
 					else
 					{
 						DeInit();
+<<<<<<< HEAD
+						return Engine::VALUE_FAILURE;
+=======
 						return Engine::RETURN_HALT;
+>>>>>>> refs/remotes/origin/master
 					}
 				}
 			}
@@ -85,6 +136,31 @@ namespace IGC
 
 			int LoadMedia()
 			{
+<<<<<<< HEAD
+				return Engine::VALUE_SUCCESS;
+			}
+			void Update()
+			{
+				static SDL_Event s_events;
+
+				//Handle events on queue
+				while (SDL_PollEvent(&s_events) != 0)
+				{
+					//check input update events
+					//if no input is processed, we check other events
+					if (Input::Update(s_events) == Input::EVENT_UNPROCESSED)
+					{
+						switch (s_events.type)
+						{
+							//User requests quit
+							case SDL_QUIT:
+								DeInit();
+								break;
+
+							//unhandled event
+							default:
+								break;
+=======
 				return Engine::RETURN_SUCCESS;
 			}
 			void Update()
@@ -120,6 +196,7 @@ namespace IGC
 						case SDLK_RIGHT:
 							Input::g_dpad_status = Input::DPAD_RIGHT;
 							break;
+>>>>>>> refs/remotes/origin/master
 						}
 					}
 				}
@@ -134,6 +211,21 @@ namespace IGC
 				int Init()
 				{
 					//Initialize SDL
+<<<<<<< HEAD
+					if (SDL_Init(SDL_INIT_VIDEO) < Engine::VALUE_SUCCESS)
+					{
+						printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+
+						return Engine::VALUE_FAILURE;
+					}
+
+					//Initialize SDL TTF Support
+					if (TTF_Init() < Engine::VALUE_SUCCESS)
+					{
+						printf("SDL could not initialize TTF Support! SDL_Error: %s\n", SDL_GetError());
+
+						return Engine::VALUE_FAILURE;
+=======
 					if (SDL_Init(SDL_INIT_VIDEO) < SDL::INIT_SUCCESS)
 					{
 						printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -147,6 +239,7 @@ namespace IGC
 						printf("SDL could not initialize TTF Support! SDL_Error: %s\n", SDL_GetError());
 
 						return Engine::RETURN_HALT;
+>>>>>>> refs/remotes/origin/master
 					}
 
 					//Create window
@@ -155,7 +248,11 @@ namespace IGC
 					{
 						printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 
+<<<<<<< HEAD
+						return Engine::VALUE_FAILURE;
+=======
 						return Engine::RETURN_HALT;
+>>>>>>> refs/remotes/origin/master
 					}
 
 					//Assign renderer to pointer
@@ -164,6 +261,18 @@ namespace IGC
 					{
 						printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
 
+<<<<<<< HEAD
+						return Engine::VALUE_FAILURE;
+					}
+
+					//Clear screen
+					if(x2D::ClearScreen() == Engine::VALUE_FAILURE)
+					{
+						return Engine::VALUE_FAILURE;
+					}
+
+					return Engine::VALUE_SUCCESS;
+=======
 						return Engine::RETURN_HALT;
 					}
 
@@ -174,6 +283,7 @@ namespace IGC
 					}
 
 					return Engine::RETURN_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 				}
 				/*This destroys the window. It also frees any surface created by
 				it. So we don't have to. And definately shouldn't try to.*/
@@ -232,7 +342,11 @@ namespace IGC
 					{
 						//if we already have a working texture, no need to waste cpu cycles
 						//if (texture != nullptr)
+<<<<<<< HEAD
+						//	return VALUE_SUCCESS;
+=======
 						//	return DRAW_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 						//look through the container for `Filename` and see if we've already loaded it
 						for (std::vector<x2D::TextureContainer*>::iterator it = TextureContainerVector.begin(); it != TextureContainerVector.end(); ++it)
 						{
@@ -240,7 +354,11 @@ namespace IGC
 							//return the `Texture` if we found a match
 							if (texture != nullptr)
 							{
+<<<<<<< HEAD
+								return VALUE_SUCCESS;
+=======
 								return DRAW_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 							}
 						}
 
@@ -252,13 +370,21 @@ namespace IGC
 						if (container_pointer->m_texture == nullptr)
 						{
 							delete container_pointer;	//we clear out the empty container
+<<<<<<< HEAD
+							return VALUE_FAILURE;		//and return with failure
+=======
 							return DRAW_FAILURE;		//and return with failure
+>>>>>>> refs/remotes/origin/master
 						}
 
 						//otherwise we add it to our list
 						TextureContainerVector.push_back(container_pointer);
 
+<<<<<<< HEAD
+						return VALUE_SUCCESS;
+=======
 						return DRAW_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 					}
 
 					int UnloadTextureByFilename(std::string filename)
@@ -272,10 +398,17 @@ namespace IGC
 								TextureContainer* container_pointer = (*it);
 								TextureContainerVector.erase(it);//remove if we find it
 								delete container_pointer;
+<<<<<<< HEAD
+								return VALUE_SUCCESS;
+							}
+						}
+						return VALUE_FAILURE;
+=======
 								return DRAW_SUCCESS;
 							}
 						}
 						return DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 					}
 
 					SDL_Texture* LoadTexture(std::string filename) {
@@ -306,11 +439,19 @@ namespace IGC
 					int SetDrawColor(SDL_Color color)
 					{
 						int function_result = SDL_SetRenderDrawColor(Video::g_renderer, color.r, color.g, color.b, color.a);
+<<<<<<< HEAD
+						if (function_result < Engine::VALUE_SUCCESS)
+						{
+							printf("Set Render Draw Color failed! SDL_Error: %s\n", SDL_GetError());
+
+							return Engine::VALUE_FAILURE;
+=======
 						if (function_result < SDL::DRAW_SUCCESS)
 						{
 							printf("Set Render Draw Color failed! SDL_Error: %s\n", SDL_GetError());
 
 							return SDL::DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 						}
 						return function_result;
 					}
@@ -318,6 +459,20 @@ namespace IGC
 					int FillRect(SDL_Color color, SDL_Rect destination_rectangle)
 					{
 						int function_result = SetDrawColor(color);
+<<<<<<< HEAD
+						if (function_result < Engine::VALUE_SUCCESS)
+							return Engine::VALUE_FAILURE;
+
+						function_result = SDL_RenderFillRect(Video::g_renderer, &destination_rectangle);
+						if (function_result < Engine::VALUE_SUCCESS)
+						{
+							printf("Could not fill rectangle! SDL_Error: %s\n", SDL_GetError());
+
+							return Engine::VALUE_FAILURE;
+						}
+
+						return Engine::VALUE_SUCCESS;
+=======
 						if (function_result < SDL::DRAW_SUCCESS)
 							return SDL::DRAW_FAILURE;
 
@@ -330,6 +485,7 @@ namespace IGC
 						}
 
 						return SDL::DRAW_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 					}
 
 					SDL_Texture* RenderText(const std::string &message, const std::string &font_filename, SDL_Color color, int font_size)
@@ -379,10 +535,17 @@ namespace IGC
 					{
 						x2D::SetDrawColor({ 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE });//TODO: Change to black
 						int function_result = SDL_RenderClear(Video::g_renderer);
+<<<<<<< HEAD
+						if (function_result < Engine::VALUE_SUCCESS)
+						{
+							printf("SDL could not clear window renderer! SDL_Error: %s\n", SDL_GetError());
+							return Engine::VALUE_FAILURE;
+=======
 						if (function_result < SDL::DRAW_SUCCESS)
 						{
 							printf("SDL could not clear window renderer! SDL_Error: %s\n", SDL_GetError());
 							return SDL::DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 						}
 						return function_result;
 					}
@@ -392,16 +555,27 @@ namespace IGC
 						if (texture == nullptr)
 						{
 							printf("Texture not initialized!\n");
+<<<<<<< HEAD
+							return Engine::VALUE_FAILURE;
+=======
 							return SDL::DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 						}
 						if (destination_rectangle.w == FULL_TEXTURE_WIDTH || destination_rectangle.h == FULL_TEXTURE_HEIGHT)
 							SDL_QueryTexture(texture, NULL, NULL, &destination_rectangle.w, &destination_rectangle.h);
 
 						int function_result = SDL_RenderCopy(Video::g_renderer, texture, NULL, &destination_rectangle);
+<<<<<<< HEAD
+						if (function_result < Engine::VALUE_SUCCESS)
+						{
+							printf("SDL could not copy texture to renderer! SDL_Error: %s\n", SDL_GetError());
+							return Engine::VALUE_FAILURE;
+=======
 						if (function_result < SDL::DRAW_SUCCESS)
 						{
 							printf("SDL could not copy texture to renderer! SDL_Error: %s\n", SDL_GetError());
 							return SDL::DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 						}
 						return function_result;
 					}
@@ -411,22 +585,36 @@ namespace IGC
 						if (texture == nullptr)
 						{
 							printf("Texture not initialized!\n");
+<<<<<<< HEAD
+							return Engine::VALUE_FAILURE;
+=======
 							return SDL::DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 						}
 						if (destination_rectangle.w == FULL_TEXTURE_WIDTH || destination_rectangle.h == FULL_TEXTURE_HEIGHT)
 							SDL_QueryTexture(texture, NULL, NULL, &destination_rectangle.w, &destination_rectangle.h);
 
 						int function_result = SDL_RenderCopy(Video::g_renderer, texture, &source_rectangle, &destination_rectangle);
+<<<<<<< HEAD
+						if (function_result < Engine::VALUE_SUCCESS)
+						{
+							printf("SDL could not copy texture to renderer! SDL_Error: %s\n", SDL_GetError());
+							return Engine::VALUE_FAILURE;
+=======
 						if (function_result < SDL::DRAW_SUCCESS)
 						{
 							printf("SDL could not copy texture to renderer! SDL_Error: %s\n", SDL_GetError());
 							return SDL::DRAW_FAILURE;
+>>>>>>> refs/remotes/origin/master
 						}
 						return function_result;
 					}
 				}
 			}
 
+<<<<<<< HEAD
+
+=======
 			namespace Audio
 			{
 				int Init()
@@ -443,12 +631,17 @@ namespace IGC
 					return Engine::RETURN_SUCCESS;
 				}
 			}
+>>>>>>> refs/remotes/origin/master
 		}
 		namespace Scripting
 		{
 			int Init()
 			{
+<<<<<<< HEAD
+				return Engine::VALUE_SUCCESS;
+=======
 				return Engine::RETURN_SUCCESS;
+>>>>>>> refs/remotes/origin/master
 			}
 		}
 	}

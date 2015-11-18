@@ -1,5 +1,10 @@
 #include <iostream>
 #include "igc.h"
+<<<<<<< HEAD
+#include "input.h"
+#include "audio.h"
+=======
+>>>>>>> refs/remotes/origin/master
 #include "animation.h"
 
 using namespace IGC;
@@ -10,6 +15,33 @@ using namespace IGC::Engine::SDL::Video;
 //this is a simple testing function
 int SimpleScene()
 {
+<<<<<<< HEAD
+	int function_result{};
+
+	//setup sprite, all the sprite stuff is static
+	static x2D::Animation* s_sprite{};
+	static int s_sprite_x = 15;
+	static int s_sprite_y = 15;
+	static int s_sprite_speed = 1;
+	//setup frames and animation status
+	static int s_current_frame = 0;
+	static int s_current_animation = 0;
+	//load animation if we haven't already
+	if (s_sprite == nullptr)
+		s_sprite = new x2D::Animation("..\\Data\\sample.png");
+
+	//setup picture
+	const std::string TEXTURE_FILENAME = "..\\Data\\sample2.png";
+	SDL_Texture* texture{};
+	//Load Texture from file
+	function_result += Video::x2D::LoadTextureByFilename(texture, TEXTURE_FILENAME);
+
+	//draw pictures
+	function_result += x2D::DrawTexture(texture, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
+	function_result += x2D::DrawTexture(texture, { 25, 25, 26, 26 });
+
+	//draw rectangle
+=======
 	static x2D::Animation* constant_sprite{};
 
 	if (constant_sprite == nullptr)
@@ -24,6 +56,7 @@ int SimpleScene()
 	//Draw stuff
 	function_result += x2D::DrawTexture(texture, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
 	function_result += x2D::DrawTexture(texture, { 25, 25, 26, 26 });
+>>>>>>> refs/remotes/origin/master
 	function_result += x2D::FillRect(
 								{ 0xFF, 0x00, 0xFF, SDL_ALPHA_OPAQUE }, //color
 								{ 0, 45, 46, 46 }						//rectangle
@@ -34,6 +67,65 @@ int SimpleScene()
 	function_result += x2D::DrawTexture(message, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
 	SDL_DestroyTexture(message);
 
+<<<<<<< HEAD
+	//change animation depending on dpad status, also move
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_UP))
+	{
+		s_current_animation = x2D::animation_north;
+		s_sprite_y -= s_sprite_speed;
+	}
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_DOWN))
+	{
+		s_current_animation = x2D::animation_south;
+		s_sprite_y += s_sprite_speed;
+	}
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_LEFT))
+	{
+		s_current_animation = x2D::animation_west;
+		s_sprite_x -= s_sprite_speed;
+	}
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_RIGHT))
+	{
+		s_current_animation = x2D::animation_east;
+		s_sprite_x += s_sprite_speed;
+	}
+	
+	//play sound
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_A))
+	{
+		Audio::PlaySound("..\\Data\\sample.wav");
+	}
+	//reset position
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_START))
+	{
+		s_current_animation = 0;
+		s_sprite_x = s_sprite_y = 15;
+	}
+
+	//exit
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_GUIDE))
+	{
+		SDL::DeInit();
+	}
+
+	//draw sprite
+	s_sprite->Draw(s_sprite_x, s_sprite_y, s_current_animation, s_current_frame);
+
+	//this checks if any direction is currently pressed
+	bool is_dpad_pressed =
+		Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_UP) ||
+			Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_DOWN) ||
+			Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_LEFT) ||
+			Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_RIGHT);
+
+	//if dpad is pressed we animate
+	if (is_dpad_pressed)
+		s_current_frame++;
+	if (s_current_frame >= 4)
+		s_current_frame = 0;
+
+	//Clear Texture By Filename, this isn't productive, it's for testing
+=======
 	static int current_frame = 0;
 	static int current_animation = 0;
 	switch (Input::g_dpad_status)
@@ -62,6 +154,7 @@ int SimpleScene()
 		current_frame = 0;
 
 	//Clear Texture By Filename
+>>>>>>> refs/remotes/origin/master
 	function_result += Video::x2D::UnloadTextureByFilename(TEXTURE_FILENAME);
 
 	return function_result;
@@ -71,7 +164,11 @@ int main(int argc, char* argv[])
 {
 	//Initialize Engine
 	int engine_status = IGC::Engine::Init();
+<<<<<<< HEAD
+	if(engine_status == IGC::Engine::VALUE_SUCCESS)
+=======
 	if(engine_status == IGC::Engine::RETURN_SUCCESS)
+>>>>>>> refs/remotes/origin/master
 	{
 		std::cout << "Engine loaded properly" << std::endl;
 	}
@@ -88,12 +185,21 @@ int main(int argc, char* argv[])
 
 	while(IGC::Engine::SDL::g_status == IGC::Engine::SDL::STATUS_RUNNING)
 	{
+<<<<<<< HEAD
+		if (IGC::Engine::SDL::Video::Update() < IGC::Engine::VALUE_SUCCESS) {
+			engine_status = IGC::Engine::VALUE_FAILURE;
+			break;
+		}
+		if (SimpleScene() < IGC::Engine::VALUE_SUCCESS) {
+			engine_status = IGC::Engine::VALUE_FAILURE;
+=======
 		if (IGC::Engine::SDL::Video::Update() < IGC::Engine::SDL::DRAW_SUCCESS) {
 			engine_status = IGC::Engine::RETURN_VIDEO_FAILURE;
 			break;
 		}
 		if (SimpleScene() < IGC::Engine::SDL::DRAW_SUCCESS) {
 			engine_status = IGC::Engine::RETURN_VIDEO_FAILURE;
+>>>>>>> refs/remotes/origin/master
 			break;
 		}
 		IGC::Engine::Sleep(100);
