@@ -23,6 +23,12 @@ namespace IGC
 						layout_top_bottom_right_left,
 						layout_bottom_top_right_left
 					};
+					enum animation_type {
+						animation_south = 0,
+						animation_west,
+						animation_east,
+						animation_north
+					};
 
 					//defaults
 					//

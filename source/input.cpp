@@ -17,7 +17,7 @@ namespace IGC
 				gamepad_status g_gamepad_status[GAMEPAD_STATUS_MAX]{};
 				int Init()
 				{
-					return Engine::RETURN_SUCCESS;
+					return Engine::VALUE_SUCCESS;
 				}
 
 				int Update(SDL_Event& event)

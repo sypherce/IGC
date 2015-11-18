@@ -54,7 +54,7 @@ namespace IGC
 				// Setup everything input related, load setting for default options, etc.
 				//
 				// Returns:
-				//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+				//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 				extern int Init();
 				
 				enum INPUT_UPDATE : int

@@ -4,18 +4,6 @@
 #include <string>
 #include "SDL.h"
 
-//roadmap
-//video
-//texture loading
-//sprites
-//tiles
-//backgrounds
-//images/banners
-//ttf text
-//bitmap text
-
-
-
 //Contains everything to do with IGC. Engine & the Editor
 namespace IGC
 {
@@ -31,15 +19,11 @@ namespace IGC
 	//Contains everything to do with Engine half of IGC
 	namespace Engine
 	{
-		// Engine Return Values. Shared by all Engine `Init()`
-		// functions, possibly __ALL__ functions
+		// Values are adopted from SDL Documentation.
 		enum : int
 		{
-			RETURN_SUCCESS = 0,			// No issues, everything loaded properly
-			RETURN_FAILURE = 1,			// We had an issue, we may not need to abort... yet
-			RETURN_VIDEO_FAILURE = 2,	// We had an issue with the video engine, we're shutting down
-			RETURN_HALT = 255			// Something bad happened here. Time to shut
-										// down and `Halt` the sytem
+			VALUE_FAILURE = -1,	// Only use this to assign failure, not to check
+			VALUE_SUCCESS = 0	// SDL Documentation specifys 0 as success, < 0 as failure
 		};
 
 		// Setup super low-level stuff. Anything that has
@@ -48,7 +32,7 @@ namespace IGC
 		// here and figuring out what OS we are working with
 		// 
 		// Returns:
-		//	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+		//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 		extern int Init();
 		
 		//Wait a specified number of milliseconds before returning.
@@ -58,21 +42,6 @@ namespace IGC
 		extern void DeInit();
 		namespace SDL
 		{
-			//SDL Return Values
-			enum : int
-			{
-				INIT_SUCCESS = 0,	// Anything less than 0 is failure.
-									// After failure run SDL_GetError()for a
-									// `char*` containing a message
-			};
-			enum : int
-			{
-				DRAW_FAILURE = -1,	// SDL Documentation specifys -1 as an error,
-									// After failure run SDL_GetError()for a
-									// `char*` containing a message
-				DRAW_SUCCESS = 0	// SDL Documentation specifys 0 as success.
-			};
-
 			// g_status is considered read-only outside of the engine
 			extern int g_status;
 			enum G_STATUS : int
@@ -89,7 +58,7 @@ namespace IGC
 			// using sub-functions.
 			//
 			// Returns:
-			//	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+			//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 			extern int Init();
 			// Clean up all SDL functions, including any lingering video, audio, or input.
 			extern void DeInit();
@@ -116,21 +85,21 @@ namespace IGC
 				// orientation, etc.
 				//
 				// Returns:
-				// 	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+				// 	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 				extern int Init();
 
 				// Clean up everything graphic related.
 				// Solely called by `SDL::DeInit`
 				//
 				// Returns:
-				//	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+				//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 				extern void DeInit();
 
 				// Draw everything on screen. Text, sprites, backgrounds, 3d or 2d.
 				// Note: does NOT update objects or coordinates.
 				//
 				//Returns:
-				//	`Engine::SDL::DRAW_SUCCESS` or `Engine::SDL::DRAW_FAILURE`
+				//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 				extern int Update();
 				namespace x2D
 				{	
@@ -231,7 +200,7 @@ namespace IGC
 				// Setup everything audio related.
 				//
 				// Returns:
-				//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+				//	Returns `Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 				extern int Init();
 				/*
 				namespace Midi
@@ -268,7 +237,7 @@ namespace IGC
 			//	NULL - ...
 			//
 			// Returns:
-			//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
+			//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
 			//
 			// See Also:
 			//	...
