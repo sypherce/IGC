@@ -4,21 +4,6 @@
 #include <string>
 #include "SDL.h"
 
-<<<<<<< HEAD
-=======
-//roadmap
-//video
-//texture loading
-//sprites
-//tiles
-//backgrounds
-//images/banners
-//ttf text
-//bitmap text
-
-
-
->>>>>>> refs/remotes/origin/master
 //Contains everything to do with IGC. Engine & the Editor
 namespace IGC
 {
@@ -34,23 +19,11 @@ namespace IGC
 	//Contains everything to do with Engine half of IGC
 	namespace Engine
 	{
-<<<<<<< HEAD
 		// Values are adopted from SDL Documentation.
 		enum : int
 		{
 			VALUE_FAILURE = -1,	// Only use this to assign failure, not to check
 			VALUE_SUCCESS = 0	// SDL Documentation specifys 0 as success, < 0 as failure
-=======
-		// Engine Return Values. Shared by all Engine `Init()`
-		// functions, possibly __ALL__ functions
-		enum : int
-		{
-			RETURN_SUCCESS = 0,			// No issues, everything loaded properly
-			RETURN_FAILURE = 1,			// We had an issue, we may not need to abort... yet
-			RETURN_VIDEO_FAILURE = 2,	// We had an issue with the video engine, we're shutting down
-			RETURN_HALT = 255			// Something bad happened here. Time to shut
-										// down and `Halt` the sytem
->>>>>>> refs/remotes/origin/master
 		};
 
 		// Setup super low-level stuff. Anything that has
@@ -59,11 +32,7 @@ namespace IGC
 		// here and figuring out what OS we are working with
 		// 
 		// Returns:
-<<<<<<< HEAD
 		//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-=======
-		//	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
->>>>>>> refs/remotes/origin/master
 		extern int Init();
 		
 		//Wait a specified number of milliseconds before returning.
@@ -73,24 +42,6 @@ namespace IGC
 		extern void DeInit();
 		namespace SDL
 		{
-<<<<<<< HEAD
-=======
-			//SDL Return Values
-			enum : int
-			{
-				INIT_SUCCESS = 0,	// Anything less than 0 is failure.
-									// After failure run SDL_GetError()for a
-									// `char*` containing a message
-			};
-			enum : int
-			{
-				DRAW_FAILURE = -1,	// SDL Documentation specifys -1 as an error,
-									// After failure run SDL_GetError()for a
-									// `char*` containing a message
-				DRAW_SUCCESS = 0	// SDL Documentation specifys 0 as success.
-			};
-
->>>>>>> refs/remotes/origin/master
 			// g_status is considered read-only outside of the engine
 			extern int g_status;
 			enum G_STATUS : int
@@ -107,11 +58,7 @@ namespace IGC
 			// using sub-functions.
 			//
 			// Returns:
-<<<<<<< HEAD
 			//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-=======
-			//	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
->>>>>>> refs/remotes/origin/master
 			extern int Init();
 			// Clean up all SDL functions, including any lingering video, audio, or input.
 			extern void DeInit();
@@ -138,33 +85,21 @@ namespace IGC
 				// orientation, etc.
 				//
 				// Returns:
-<<<<<<< HEAD
 				// 	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-=======
-				// 	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
->>>>>>> refs/remotes/origin/master
 				extern int Init();
 
 				// Clean up everything graphic related.
 				// Solely called by `SDL::DeInit`
 				//
 				// Returns:
-<<<<<<< HEAD
 				//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-=======
-				//	`Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
->>>>>>> refs/remotes/origin/master
 				extern void DeInit();
 
 				// Draw everything on screen. Text, sprites, backgrounds, 3d or 2d.
 				// Note: does NOT update objects or coordinates.
 				//
 				//Returns:
-<<<<<<< HEAD
 				//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-=======
-				//	`Engine::SDL::DRAW_SUCCESS` or `Engine::SDL::DRAW_FAILURE`
->>>>>>> refs/remotes/origin/master
 				extern int Update();
 				namespace x2D
 				{	
@@ -260,99 +195,6 @@ namespace IGC
 				}
 				*/
 			}
-<<<<<<< HEAD
-=======
-			namespace Audio
-			{
-				// Setup everything audio related.
-				//
-				// Returns:
-				//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
-				extern int Init();
-				/*
-				namespace Midi
-				{
-					
-				}
-				namespace Raw
-				{
-					
-				}
-				namespace Music
-				{
-					
-				}
-				namespace SoundEffects
-				{
-					
-				}
-				namespace Microphone
-				{
-					
-				}
-				*/
-			}
-			namespace Input //xinput by default
-			{
-				enum dpad_status {
-					DPAD_NONE,
-					DPAD_UP,
-					DPAD_DOWN,
-					DPAD_LEFT,
-					DPAD_RIGHT
-				};
-				extern dpad_status g_dpad_status;
-
-				// Setup everything input related, load setting for default options, etc.
-				//
-				// Returns:
-				//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
-				extern int Init();
-				/*
-				namespace Keyboard
-				{
-					
-				}
-				namespace Mouse
-				{
-					
-				}
-				namespace Touch
-				{
-					
-				}
-				namespace Gamepad
-				{
-					namespace Windows
-					{
-						namespace DInput
-						{
-							
-						}
-						namespace XInput
-						{
-							
-						}
-					}
-					namespace Android_IOS
-					{
-						namespace Bluetooth
-						{
-							
-						}
-						namespace iCade
-						{
-							
-						}
-						namespace Keyboard
-						{
-							
-						}
-					}
-				}
-				*/
-			}
->>>>>>> refs/remotes/origin/master
 		}
 		namespace Scripting
 		{
@@ -365,11 +207,7 @@ namespace IGC
 			//	NULL - ...
 			//
 			// Returns:
-<<<<<<< HEAD
 			//	`Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-=======
-			//	Returns `Engine::RETURN_SUCCESS` or `Engine::RETURN_HALT`
->>>>>>> refs/remotes/origin/master
 			//
 			// See Also:
 			//	...

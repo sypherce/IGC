@@ -1,10 +1,7 @@
 #include <iostream>
 #include "igc.h"
-<<<<<<< HEAD
 #include "input.h"
 #include "audio.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "animation.h"
 
 using namespace IGC;
@@ -15,7 +12,6 @@ using namespace IGC::Engine::SDL::Video;
 //this is a simple testing function
 int SimpleScene()
 {
-<<<<<<< HEAD
 	int function_result{};
 
 	//setup sprite, all the sprite stuff is static
@@ -41,22 +37,6 @@ int SimpleScene()
 	function_result += x2D::DrawTexture(texture, { 25, 25, 26, 26 });
 
 	//draw rectangle
-=======
-	static x2D::Animation* constant_sprite{};
-
-	if (constant_sprite == nullptr)
-		constant_sprite = new x2D::Animation("..\\Data\\sample.png");
-	const std::string TEXTURE_FILENAME = "..\\Data\\gba.png";
-	SDL_Texture* texture{};
-
-	int function_result{};
-	//Load Texture from file
-	function_result += Video::x2D::LoadTextureByFilename(texture, TEXTURE_FILENAME);
-
-	//Draw stuff
-	function_result += x2D::DrawTexture(texture, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
-	function_result += x2D::DrawTexture(texture, { 25, 25, 26, 26 });
->>>>>>> refs/remotes/origin/master
 	function_result += x2D::FillRect(
 								{ 0xFF, 0x00, 0xFF, SDL_ALPHA_OPAQUE }, //color
 								{ 0, 45, 46, 46 }						//rectangle
@@ -67,7 +47,6 @@ int SimpleScene()
 	function_result += x2D::DrawTexture(message, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
 	SDL_DestroyTexture(message);
 
-<<<<<<< HEAD
 	//change animation depending on dpad status, also move
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_UP))
 	{
@@ -125,36 +104,6 @@ int SimpleScene()
 		s_current_frame = 0;
 
 	//Clear Texture By Filename, this isn't productive, it's for testing
-=======
-	static int current_frame = 0;
-	static int current_animation = 0;
-	switch (Input::g_dpad_status)
-	{
-	case Input::DPAD_UP:
-		current_animation = 3;
-		break;
-	case Input::DPAD_DOWN:
-		current_animation = 0;
-		break;
-	case Input::DPAD_LEFT:
-		current_animation = 1;
-		break;
-	case Input::DPAD_RIGHT:
-		current_animation = 2;
-		break;
-	default:
-		current_frame--;
-		if (current_frame < 0)
-			current_frame = 0;
-		break;
-	}
-
-	constant_sprite->Draw(15, 55, current_animation, current_frame++);
-	if (current_frame >= 4)
-		current_frame = 0;
-
-	//Clear Texture By Filename
->>>>>>> refs/remotes/origin/master
 	function_result += Video::x2D::UnloadTextureByFilename(TEXTURE_FILENAME);
 
 	return function_result;
@@ -164,11 +113,7 @@ int main(int argc, char* argv[])
 {
 	//Initialize Engine
 	int engine_status = IGC::Engine::Init();
-<<<<<<< HEAD
 	if(engine_status == IGC::Engine::VALUE_SUCCESS)
-=======
-	if(engine_status == IGC::Engine::RETURN_SUCCESS)
->>>>>>> refs/remotes/origin/master
 	{
 		std::cout << "Engine loaded properly" << std::endl;
 	}
@@ -185,21 +130,12 @@ int main(int argc, char* argv[])
 
 	while(IGC::Engine::SDL::g_status == IGC::Engine::SDL::STATUS_RUNNING)
 	{
-<<<<<<< HEAD
 		if (IGC::Engine::SDL::Video::Update() < IGC::Engine::VALUE_SUCCESS) {
 			engine_status = IGC::Engine::VALUE_FAILURE;
 			break;
 		}
 		if (SimpleScene() < IGC::Engine::VALUE_SUCCESS) {
 			engine_status = IGC::Engine::VALUE_FAILURE;
-=======
-		if (IGC::Engine::SDL::Video::Update() < IGC::Engine::SDL::DRAW_SUCCESS) {
-			engine_status = IGC::Engine::RETURN_VIDEO_FAILURE;
-			break;
-		}
-		if (SimpleScene() < IGC::Engine::SDL::DRAW_SUCCESS) {
-			engine_status = IGC::Engine::RETURN_VIDEO_FAILURE;
->>>>>>> refs/remotes/origin/master
 			break;
 		}
 		IGC::Engine::Sleep(100);

@@ -194,9 +194,3 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-*.txt
-libs/SDL/lib/win32/SDL2main.lib
-*.lib
-libs/SDL/lib/win32/SDL2.dll
-libs/SDL2_mixer-2.0.0/include/SDL_mixer.h
-libs/SDL/include/SDL_types.h
