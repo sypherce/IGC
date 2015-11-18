@@ -38,9 +38,7 @@ namespace IGC
 					//this is temporary. static for the time being too.
 					static Mix_Chunk *audio_chunk{};
 					if (audio_chunk == nullptr)//we haven't loaded YET!
-					{
 						audio_chunk = Mix_LoadWAV(filename.c_str());
-					}
 					if (audio_chunk == nullptr)//we failed to load
 					{
 						printf("SDL_mixer failed to load audio file %s! Mix_GetError: %s\n", filename.c_str(), Mix_GetError());
