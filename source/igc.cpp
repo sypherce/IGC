@@ -4,9 +4,10 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include "SDL_mixer.h"
 #include "igc.h"
 #include "input.h"
-
+#include "audio.h"
 
 namespace IGC
 {
@@ -410,13 +411,6 @@ namespace IGC
 				}
 			}
 
-			namespace Audio
-			{
-				int Init()
-				{
-					return Engine::VALUE_SUCCESS;
-				}
-			}
 
 		}
 		namespace Scripting

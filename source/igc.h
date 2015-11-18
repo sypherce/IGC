@@ -195,36 +195,6 @@ namespace IGC
 				}
 				*/
 			}
-			namespace Audio
-			{
-				// Setup everything audio related.
-				//
-				// Returns:
-				//	Returns `Engine::VALUE_SUCCESS` or `Engine::VALUE_FAILURE`
-				extern int Init();
-				/*
-				namespace Midi
-				{
-					
-				}
-				namespace Raw
-				{
-					
-				}
-				namespace Music
-				{
-					
-				}
-				namespace SoundEffects
-				{
-					
-				}
-				namespace Microphone
-				{
-					
-				}
-				*/
-			}
 		}
 		namespace Scripting
 		{

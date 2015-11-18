@@ -1,6 +1,7 @@
 #include <iostream>
 #include "igc.h"
 #include "input.h"
+#include "audio.h"
 #include "animation.h"
 
 using namespace IGC;
@@ -68,8 +69,10 @@ int SimpleScene()
 		s_sprite_x += s_sprite_speed;
 	}
 	
+	//play sound
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_A))
 	{
+		Audio::PlaySound("..\\Data\\sample.wav");
 	}
 	//reset position
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_START))
