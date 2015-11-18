@@ -18,7 +18,11 @@ namespace IGC
 					{
 						m_filename = filename;
 						m_layout = layout_top_bottom_left_right;
+<<<<<<< HEAD
 						if (LoadTextureByFilename(m_texture, m_filename) == VALUE_FAILURE)
+=======
+						if (LoadTextureByFilename(m_texture, m_filename) == DRAW_FAILURE)
+>>>>>>> refs/remotes/origin/master
 						{
 							printf("Failed to initialize texture\n");
 							return;
@@ -35,7 +39,11 @@ namespace IGC
 						m_filename = filename;
 						m_layout = layout;
 						m_frame_dimensions = frame_dimensions;
+<<<<<<< HEAD
 						if (LoadTextureByFilename(m_texture, m_filename) == VALUE_FAILURE)
+=======
+						if (LoadTextureByFilename(m_texture, m_filename) == DRAW_FAILURE)
+>>>>>>> refs/remotes/origin/master
 						{
 							printf("Failed to initialize texture\n");
 						}
@@ -49,7 +57,11 @@ namespace IGC
 							frame_count = DEFAULT_FRAME_COUNT;
 						m_filename = filename;
 						m_layout = layout;
+<<<<<<< HEAD
 						if (LoadTextureByFilename(m_texture, m_filename) == VALUE_FAILURE)
+=======
+						if (LoadTextureByFilename(m_texture, m_filename) == DRAW_FAILURE)
+>>>>>>> refs/remotes/origin/master
 						{
 							printf("Failed to initialize texture\n");
 							return;

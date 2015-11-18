@@ -20,16 +20,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\animation.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\source\audio.cpp" />
     <ClCompile Include="..\source\igc.cpp" />
     <ClCompile Include="..\source\input.cpp" />
+=======
+    <ClCompile Include="..\source\igc.cpp" />
+>>>>>>> refs/remotes/origin/master
     <ClCompile Include="..\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\animation.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\source\audio.h" />
     <ClInclude Include="..\source\igc.h" />
     <ClInclude Include="..\source\input.h" />
+=======
+    <ClInclude Include="..\source\igc.h" />
+>>>>>>> refs/remotes/origin/master
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D879701-39B5-427A-9BD8-8A9251A8EBD8}</ProjectGuid>
@@ -85,16 +93,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+<<<<<<< HEAD
     <IncludePath>..\libs\SDL\include;..\libs\SDL2_image-2.0.0\include;..\libs\SDL2_ttf-2.0.12\include;..\libs\SDL2_mixer-2.0.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>..\libs\SDL\lib\win32;..\libs\SDL2_image-2.0.0\lib\x86;..\libs\SDL2_ttf-2.0.12\lib\x86;..\libs\SDL2_mixer-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
+=======
+    <IncludePath>..\libs\SDL\include;..\libs\SDL2_image-2.0.0\include;..\libs\SDL2_ttf-2.0.12\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\libs\SDL\lib\win32;..\libs\SDL2_image-2.0.0\lib\x86;..\libs\SDL2_ttf-2.0.12\lib\x86;$(LibraryPath)</LibraryPath>
+>>>>>>> refs/remotes/origin/master
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+<<<<<<< HEAD
     <IncludePath>..\libs\SDL\include;..\libs\SDL2_image-2.0.0\include;..\libs\SDL2_ttf-2.0.12\include;..\libs\SDL2_mixer-2.0.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>..\libs\SDL\lib\win32;..\libs\SDL2_image-2.0.0\lib\x86;..\libs\SDL2_ttf-2.0.12\lib\x86;..\libs\SDL2_mixer-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
+=======
+    <IncludePath>..\libs\SDL\include;..\libs\SDL2_image-2.0.0\include;..\libs\SDL2_ttf-2.0.12\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\libs\SDL\lib\win32;..\libs\SDL2_image-2.0.0\lib\x86;..\libs\SDL2_ttf-2.0.12\lib\x86;$(LibraryPath)</LibraryPath>
+>>>>>>> refs/remotes/origin/master
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -111,7 +129,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+<<<<<<< HEAD
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> refs/remotes/origin/master
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,7 +166,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+<<<<<<< HEAD
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> refs/remotes/origin/master
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
