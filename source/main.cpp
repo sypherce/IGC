@@ -11,14 +11,23 @@ using namespace IGC::Engine::SDL::Video;
 //this is a simple testing function
 int SimpleScene()
 {
-	static x2D::Animation* constant_sprite{};
+	int function_result{};
 
-	if (constant_sprite == nullptr)
-		constant_sprite = new x2D::Animation("..\\Data\\sample.png");
+	//setup sprite, all the sprite stuff is static
+	static x2D::Animation* s_sprite{};
+	static int s_sprite_x = 15;
+	static int s_sprite_y = 15;
+	static int s_sprite_speed = 1;
+	//setup frames and animation status
+	static int s_current_frame = 0;
+	static int s_current_animation = 0;
+	//load animation if we haven't already
+	if (s_sprite == nullptr)
+		s_sprite = new x2D::Animation("..\\Data\\sample.png");
+
+	//setup picture
 	const std::string TEXTURE_FILENAME = "..\\Data\\gba.png";
 	SDL_Texture* texture{};
-
-	int function_result{};
 	//Load Texture from file
 	function_result += Video::x2D::LoadTextureByFilename(texture, TEXTURE_FILENAME);
 
@@ -35,43 +44,59 @@ int SimpleScene()
 	function_result += x2D::DrawTexture(message, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
 	SDL_DestroyTexture(message);
 
-	//setup frames and animation status, status is static
-	static int current_frame = 0;
-	static int current_animation = 0;
+	//change animation depending on dpad status, also move
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_UP))
+	{
+		s_current_animation = 3;
+		s_sprite_y -= s_sprite_speed;
+	}
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_DOWN))
+	{
+		s_current_animation = 0;
+		s_sprite_y += s_sprite_speed;
+	}
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_LEFT))
+	{
+		s_current_animation = 1;
+		s_sprite_x -= s_sprite_speed;
+	}
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_RIGHT))
+	{
+		s_current_animation = 2;
+		s_sprite_x += s_sprite_speed;
+	}
+	
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_A))
+	{
+	}
+	//reset position
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_START))
+	{
+		s_current_animation = 0;
+		s_sprite_x = s_sprite_y = 15;
+	}
 
-	//this checks if any direction is currently pressed
-	bool is_dpad_pressed =
-		((Input::g_player1_gamepad_status.buttons & Input::DPAD_UP) +
-			(Input::g_player1_gamepad_status.buttons & Input::DPAD_DOWN) +
-			(Input::g_player1_gamepad_status.buttons & Input::DPAD_LEFT) +
-			(Input::g_player1_gamepad_status.buttons & Input::DPAD_RIGHT));
-
-	//change animation depending on dpad status
-	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_UP)
+	//exit
+	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_GUIDE))
 	{
-		current_animation = 3;
-	}
-	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_DOWN)
-	{
-		current_animation = 0;
-	}
-	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_LEFT)
-	{
-		current_animation = 1;
-	}
-	if (Input::g_player1_gamepad_status.buttons & Input::DPAD_RIGHT)
-	{
-		current_animation = 2;
+		SDL::DeInit();
 	}
 
 	//draw sprite
-	constant_sprite->Draw(15, 55, current_animation, current_frame);
+	s_sprite->Draw(s_sprite_x, s_sprite_y, s_current_animation, s_current_frame);
+
+	//this checks if any direction is currently pressed
+	bool is_dpad_pressed =
+		Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_UP) ||
+			Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_DOWN) ||
+			Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_LEFT) ||
+			Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_RIGHT);
 
 	//if dpad is pressed we animate
 	if (is_dpad_pressed)
-		current_frame++;
-	if (current_frame >= 4)
-		current_frame = 0;
+		s_current_frame++;
+	if (s_current_frame >= 4)
+		s_current_frame = 0;
 
 	//Clear Texture By Filename
 	function_result += Video::x2D::UnloadTextureByFilename(TEXTURE_FILENAME);

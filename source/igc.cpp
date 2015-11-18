@@ -93,68 +93,23 @@ namespace IGC
 			{
 				static SDL_Event s_events;//temporary
 				//Handle events on queue
-
-				//Reset Input Status
-				//Input::g_player1_gamepad_status.buttons |= Input::DPAD_NONE;
-
 				while (SDL_PollEvent(&s_events) != 0)
 				{
-					switch (s_events.type)
+					//check input update events
+					//if no input is processed, we check other events
+					if (Input::Update(s_events) == Input::EVENT_UNPROCESSED)
 					{
-						//User requests quit
-						case SDL_QUIT:
-							DeInit();
-							break;
-
-						//If a key was pressed
-						case SDL_KEYDOWN:
+						switch (s_events.type)
 						{
-							switch (s_events.key.keysym.sym)
-							{
-								case SDLK_UP:
-									Input::g_player1_gamepad_status.buttons |= Input::DPAD_UP;
-									break;
-								case SDLK_DOWN:
-									Input::g_player1_gamepad_status.buttons |= Input::DPAD_DOWN;
-									break;
-								case SDLK_LEFT:
-									Input::g_player1_gamepad_status.buttons |= Input::DPAD_LEFT;
-									break;
-								case SDLK_RIGHT:
-									Input::g_player1_gamepad_status.buttons |= Input::DPAD_RIGHT;
-									break;
-								default://unhandled key press 
-									break;
-							}
-							break;
-						}
+							//User requests quit
+							case SDL_QUIT:
+								DeInit();
+								break;
 
-						//If a key was released
-						case SDL_KEYUP:
-						{
-							switch (s_events.key.keysym.sym)
-							{
-								case SDLK_UP:
-									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_UP;
-									break;
-								case SDLK_DOWN:
-									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_DOWN;
-									break;
-								case SDLK_LEFT:
-									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_LEFT;
-									break;
-								case SDLK_RIGHT:
-									Input::g_player1_gamepad_status.buttons &= ~Input::DPAD_RIGHT;
-									break;
-								default://unhandled key press 
-									break;
-							}
-							break;
+							//unhandled event
+							default:
+								break;
 						}
-
-						//unhandled event
-						default:
-							break;
 					}
 				}
 			}
