@@ -24,10 +24,10 @@ int SimpleScene()
 	static int s_current_animation = 0;
 	//load animation if we haven't already
 	if (s_sprite == nullptr)
-		s_sprite = new x2D::Animation("..\\Data\\sample.png");
+		s_sprite = new x2D::Animation("Data\\sample.png");
 
 	//setup picture
-	const std::string TEXTURE_FILENAME = "..\\Data\\sample2.png";
+	const std::string TEXTURE_FILENAME = "Data\\sample2.png";
 	SDL_Texture* texture{};
 	//Load Texture from file
 	function_result += Video::x2D::LoadTextureByFilename(texture, TEXTURE_FILENAME);
@@ -43,7 +43,7 @@ int SimpleScene()
 									);
 
 	//Draw Message
-	SDL_Texture *message = x2D::RenderText("Hello Simple Scene!", "..\\Data\\sample.ttf", { 0, 0, 0, SDL_ALPHA_OPAQUE }, 48);
+	SDL_Texture *message = x2D::RenderText("Hello Simple Scene!", "Data\\sample.ttf", { 0, 0, 0, SDL_ALPHA_OPAQUE }, 48);
 	function_result += x2D::DrawTexture(message, { 0, 0, x2D::FULL_TEXTURE_WIDTH, x2D::FULL_TEXTURE_HEIGHT });
 	SDL_DestroyTexture(message);
 
@@ -72,7 +72,7 @@ int SimpleScene()
 	//play sound
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_A))
 	{
-		Audio::PlaySound("..\\Data\\sample.wav");
+		Audio::PlaySound("Data\\sample.wav");
 	}
 	//reset position
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_START))
