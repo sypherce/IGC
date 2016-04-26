@@ -50,22 +50,22 @@ int SimpleScene()
 	//change animation depending on dpad status, also move
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_UP))
 	{
-		s_current_animation = x2D::animation_north;
+		s_current_animation = x2D::ANIMATION_NORTH;
 		s_sprite_y -= s_sprite_speed;
 	}
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_DOWN))
 	{
-		s_current_animation = x2D::animation_south;
+		s_current_animation = x2D::ANIMATION_SOUTH;
 		s_sprite_y += s_sprite_speed;
 	}
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_LEFT))
 	{
-		s_current_animation = x2D::animation_west;
+		s_current_animation = x2D::ANIMATION_WEST;
 		s_sprite_x -= s_sprite_speed;
 	}
 	if (Input::IsPressed(Input::PLAYER_1, Input::BUTTON_DPAD_RIGHT))
 	{
-		s_current_animation = x2D::animation_east;
+		s_current_animation = x2D::ANIMATION_EAST;
 		s_sprite_x += s_sprite_speed;
 	}
 	
